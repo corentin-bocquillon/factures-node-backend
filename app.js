@@ -34,7 +34,7 @@ passport.deserializeUser(function(id, done) {
 });
 
 app.use(session({
-    store: new RedisStore({redisClient}),
+    store: new RedisStore(redisClient),
     secret: '&!Kwh{V%Th<z;)\-,Fwd{Et)0',
     resave: true,
     saveUninitialized: true}));
