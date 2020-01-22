@@ -2,11 +2,16 @@
 
 const express = require('express');
 const app = express()
+const redis = require('redis');
 const session = require('express-session');
 const passport = require('passport');
 const bodyParser = require('body-parser')
 
 const LocalStrategy = require('passport-local').Strategy;
+let RedisStore = require('connect-redis')(session)
+let redisClient = redis.createClient({
+    url: "redis://redis:6379"
+})
 
 const port = 3000;
 
@@ -28,7 +33,11 @@ passport.deserializeUser(function(id, done) {
     done(null, id);
 });
 
-app.use(session({ secret: '&!Kwh{V%Th<z;)\-,Fwd{Et)0', resave: true, saveUninitialized: true }));
+app.use(session({
+    store: new RedisStore({redisClient}),
+    secret: '&!Kwh{V%Th<z;)\-,Fwd{Et)0',
+    resave: true,
+    saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json())
