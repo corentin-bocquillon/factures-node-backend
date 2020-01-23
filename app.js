@@ -9,7 +9,7 @@ const bodyParser = require('body-parser')
 
 const LocalStrategy = require('passport-local').Strategy;
 let RedisStore = require('connect-redis')(session)
-let redisClient = redis.createClient(6379, redis);
+let redisClient = redis.createClient(6379, "redis");
 
 const port = 3000;
 
