@@ -9,7 +9,7 @@ const bodyParser = require('body-parser')
 
 const LocalStrategy = require('passport-local').Strategy;
 let RedisStore = require('connect-redis')(session)
-let redisClient = redis.createClient("redis://redis:6379");
+let redisClient = redis.createClient(6379, redis);
 
 const port = 3000;
 
@@ -32,7 +32,7 @@ passport.deserializeUser(function(id, done) {
 });
 
 app.use(session({
-    store: new RedisStore(redisClient),
+    store: new RedisStore({ client: redisClient }),
     secret: '&!Kwh{V%Th<z;)\-,Fwd{Et)0',
     resave: true,
     saveUninitialized: true}));
