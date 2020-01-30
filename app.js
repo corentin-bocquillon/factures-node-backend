@@ -11,16 +11,23 @@ const LocalStrategy = require('passport-local').Strategy;
 let RedisStore = require('connect-redis')(session)
 let redisClient = redis.createClient(6379, "redis");
 
+const User = require('./models/user.js');
+
 const port = 3000;
 
 // Passport initialization
 passport.use(new LocalStrategy(
     function(username, password, done) {
-        if(username === "admin" && password === "admin"){
-            return done(null, username);
-        } else {
-            return done("unauthorized access", false);
-        }
+        User.findOne({ username: username }, function (err, user) {
+            if (err) { return done(err); }
+            if (!user) {
+                return done(null, false, { message: 'Incorrect username.' });
+            }
+            if (!user.validPassword(password)) {
+                return done(null, false, { message: 'Incorrect password.' });
+            }
+            return done(null, user);
+        });
     }
 ));
 
@@ -32,7 +39,6 @@ passport.deserializeUser(function(id, done) {
     done(null, id);
 });
 
-// Session management
 app.use(session({
     store: new RedisStore({ client: redisClient }),
     secret: '&!Kwh{V%Th<z;)\-,Fwd{Et)0',
