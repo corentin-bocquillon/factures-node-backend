@@ -1,17 +1,17 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
+    "username": "factures",
+    "password": "xxx",
     "database": "factures_development",
-    "host": "127.0.0.1",
+    "host": "postgres",
     "dialect": "postgres",
     "operatorsAliases": false
   },
   "test": {
-    "username": "root",
-    "password": null,
+    "username": "factures",
+    "password": "xxx",
     "database": "factures_test",
-    "host": "127.0.0.1",
+    "host": "postgres",
     "dialect": "postgres",
     "operatorsAliases": false
   },
