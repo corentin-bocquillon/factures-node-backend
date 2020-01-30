@@ -13,6 +13,7 @@ let redisClient = redis.createClient(6379, "redis");
 
 const port = 3000;
 
+// Passport initialization
 passport.use(new LocalStrategy(
     function(username, password, done) {
         if(username === "admin" && password === "admin"){
@@ -24,13 +25,14 @@ passport.use(new LocalStrategy(
 ));
 
 passport.serializeUser(function(user, done) {
-    if(user) done(null, user);
+    if(user) done(null, user.id);
 });
-  
+
 passport.deserializeUser(function(id, done) {
     done(null, id);
 });
 
+// Session management
 app.use(session({
     store: new RedisStore({ client: redisClient }),
     secret: '&!Kwh{V%Th<z;)\-,Fwd{Et)0',
@@ -40,6 +42,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json())
 
+// Auth middleware
 const auth = () => {
     return (req, res, next) => {
         passport.authenticate('local', (error, user, info) => {
@@ -52,10 +55,7 @@ const auth = () => {
     }
 }
 
-app.post('/api/authenticate', auth(), (req, res) => {
-    res.status(200).json({"statusCode": 200 , "message": res.user});
-});
-
+// isLoggedIn guard
 const isLoggedIn = (req, res, next) => {
     if(req.isAuthenticated()){
         return next()
@@ -63,14 +63,28 @@ const isLoggedIn = (req, res, next) => {
     return res.status(400).json({"statusCode" : 400, "message" : "not authenticated"})
 }
 
-app.get('/api/authenticate', (req, res) => {
-    res.status(200).json({"statusCode": 200, "message": "test narusite"})
+// Authentication
+app.post('/api/authenticate', auth(), (req, res) => {
+    res.status(200).json({"statusCode": 200 , "message": res.user});
 });
 
-app.post('/api/generate-facture', isLoggedIn, (req, res) => {
-    res.status(200).json({"statusCode": 200, "message": "Error, facture not generated."});
+// Logout
+app.get('/api/logout', function(req, res) {
+    req.logout();
+    res.status(200).json({"statusCode": 200, "message": "Logged out."});
 });
 
+// Getting profile
+app.get('/api/get-profile', isLoggedIn, (req, res) => {
+    
+});
+
+// Generate a bill
+// app.post('/api/generate-bill', isLoggedIn, (req, res) => {
+//     res.status(200).json({"statusCode": 200, "message": "Error, facture not generated."});
+// });
+
+// Run server
 app.listen(port, () => {
     console.log(`Server running at port ${port}`);
 });
