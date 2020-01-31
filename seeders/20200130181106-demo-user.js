@@ -8,7 +8,7 @@ module.exports = {
       let salt = await utils.generateSalt(config.saltSize);
       let hashedPassword = await utils.getPasswordHash('test123', salt);
 
-      return queryInterface.bulkInsert('User', [{
+      return queryInterface.bulkInsert('users', [{
           email: 'root@factures.org',
           hashedPassword: hashedPassword,
           salt: salt,
