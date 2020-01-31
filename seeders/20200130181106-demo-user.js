@@ -10,10 +10,10 @@ module.exports = {
 
       return queryInterface.bulkInsert('users', [{
           email: 'root@factures.org',
-          hashedPassword: 'test123'+salt,
-          salt: salt,
+          hashedPassword: 'test123',
+          salt: 'salt',
           companyName: 'TestCompany',
-          companyAddress: 'TestCompany\nAddress',
+          companyAddress: 'TestCompany Address',
           companyNumber: '123456',
           phoneNumber: '+33101010101'
       }], {});
