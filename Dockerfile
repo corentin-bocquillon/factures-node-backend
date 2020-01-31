@@ -5,6 +5,8 @@ RUN apt-get update
 RUN apt-get install -y texlive-full
 
 COPY ./docker/usr/bin/docker-entrypoint.sh /usr/bin/docker-entrypoint.sh
+ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh /usr/bin/wait-for-it.sh
+RUN chmod +x /usr/bin/wait-for-it.sh
 
 WORKDIR /usr/src/app
 
@@ -19,5 +21,5 @@ COPY . .
 
 EXPOSE 3000
 
-ENTRYPOINT ["/bin/bash"]
-CMD ["/usr/bin/docker-entrypoint.sh"]
+ENTRYPOINT ["/bin/sh", "-c"]
+CMD ["/usr/bin/wait-for-it.sh", "postgres:5432", "--", "/usr/bin/docker-entrypoint.sh"]
