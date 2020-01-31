@@ -14,6 +14,18 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
+      companyName: {
+        type: Sequelize.STRING
+      },
+      companyAddress: {
+        type: Sequelize.STRING
+      },
+      companyNumber: {
+        type: Sequelize.STRING
+      },
+      phoneNumber: {
+          type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
