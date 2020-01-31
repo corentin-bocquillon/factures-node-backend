@@ -22,5 +22,6 @@
     "host": "postgres",
     "dialect": "postgres",
     "operatorsAliases": false
-  }
+  },
+  const saltSize: 256
 }
