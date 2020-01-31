@@ -23,5 +23,5 @@
     "dialect": "postgres",
     "operatorsAliases": false
   },
-  saltSize: 256
+  "saltSize": 256
 }
