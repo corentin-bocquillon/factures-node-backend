@@ -15,19 +15,22 @@ const User = require('./models/user.js');
 
 const port = 3000;
 
+const utils = require('./src/utils.js')
+
 // Passport initialization
 passport.use(new LocalStrategy(
     function(username, password, done) {
-        User.findOne({ username: username }, function (err, user) {
-            if (err) { return done(err); }
-            if (!user) {
-                return done(null, false, { message: 'Incorrect username.' });
-            }
-            if (!user.validPassword(password)) {
+        try {
+            const user = await User.findOne({where: { email: username }});
+            let hashedPassword = await getPasswordHash(password, user.salt);
+            if (hashedPassword === user.hashedPassword) {
+                return done(null, err);
+            } else {
                 return done(null, false, { message: 'Incorrect password.' });
             }
-            return done(null, user);
-        });
+        } catch(err) {
+            return done(null, false, { message: 'Incorrect username.' });
+        }
     }
 ));
 
