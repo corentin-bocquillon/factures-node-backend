@@ -22,4 +22,4 @@ COPY . .
 EXPOSE 3000
 
 ENTRYPOINT ["/bin/sh", "-c"]
-CMD ["/usr/bin/wait-for-it.sh", "postgres:5432", "--", "/usr/bin/docker-entrypoint.sh"]
+CMD ["/usr/bin/wait-for-it.sh postgres:5432 -- /usr/bin/docker-entrypoint.sh"]
