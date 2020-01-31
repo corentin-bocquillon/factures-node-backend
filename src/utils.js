@@ -5,7 +5,7 @@ const util = require('util');
 
 module.exports = {
     generateSalt: (size) => {
-        return util.promisify(crypto.randomBytes);
+        return util.promisify(crypto.randomBytes)(size);
     },
 
     getPasswordHash: (password, salt) => {
