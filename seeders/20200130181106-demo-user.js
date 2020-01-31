@@ -4,7 +4,7 @@ const utils = require('../src/utils.js')
 const config = require('../config/config.json')
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  up: async (queryInterface, Sequelize) => {
       let salt = await utils.generateSalt(config.saltSize);
       let hashedPassword = await utils.getPasswordHash('test123', salt);
 
