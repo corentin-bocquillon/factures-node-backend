@@ -1,23 +1,23 @@
 {
   "development": {
     "username": "factures",
-    "password": "8hBw3wJdHQhGv73KvtKmnikLU",
+    "password": "xxx",
     "database": "factures_development",
-    "host": "127.0.0.1",
+    "host": "postgres",
     "dialect": "postgres",
     "operatorsAliases": false
   },
   "test": {
     "username": "factures",
-    "password": "8hBw3wJdHQhGv73KvtKmnikLU",
+    "password": "xxx",
     "database": "factures_test",
-    "host": "127.0.0.1",
+    "host": "postgres",
     "dialect": "postgres",
     "operatorsAliases": false
   },
   "production": {
     "username": "factures",
-    "password": "8hBw3wJdHQhGv73KvtKmnikLU",
+    "password": "xxx",
     "database": "factures_production",
     "host": "postgres",
     "dialect": "postgres",
