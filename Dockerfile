@@ -19,4 +19,5 @@ COPY . .
 
 EXPOSE 3000
 
-ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
+ENTRYPOINT ["/bin/bash"]
+CMD ["/usr/bin/docker-entrypoint.sh"]

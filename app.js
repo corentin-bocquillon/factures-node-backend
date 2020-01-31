@@ -17,30 +17,8 @@ const port = 3000;
 
 const utils = require('./src/utils.js')
 
-// Passport initialization
-passport.use(new LocalStrategy(
-    function(username, password, done) {
-        try {
-            const user = await User.findOne({where: { email: username }});
-            let hashedPassword = await getPasswordHash(password, user.salt);
-            if (hashedPassword === user.hashedPassword) {
-                return done(null, err);
-            } else {
-                return done(null, false, { message: 'Incorrect password.' });
-            }
-        } catch(err) {
-            return done(null, false, { message: 'Incorrect username.' });
-        }
-    }
-));
-
-passport.serializeUser(function(user, done) {
-    if(user) done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-    done(null, id);
-});
+// Add passport configuration
+require('./config/passport.js')(passport)
 
 app.use(session({
     store: new RedisStore({ client: redisClient }),
@@ -69,7 +47,7 @@ const isLoggedIn = (req, res, next) => {
     if(req.isAuthenticated()){
         return next()
     }
-    return res.status(400).json({"statusCode" : 400, "message" : "not authenticated"})
+    return res.status(400).json({"statusCode" : 400, "message" : "Not authenticated"})
 }
 
 // Authentication
