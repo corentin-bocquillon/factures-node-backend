@@ -4,6 +4,8 @@ FROM node:13.6.0
 RUN apt-get update
 RUN apt-get install -y texlive-full
 
+COPY ./docker/usr/bin/docker-entrypoint.sh /usr/bin/docker-entrypoint.sh
+
 WORKDIR /usr/src/app
 
 COPY package*.json ./
@@ -17,4 +19,4 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["node", "app.js"]
+ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
