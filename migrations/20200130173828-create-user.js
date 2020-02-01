@@ -9,31 +9,39 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       email: {
-        type: Sequelize.STRING
+          type: Sequelize.STRING,
+          allowNull: false,
+          unique: true
       },
-      hashedPassword: {
-        type: Sequelize.STRING
+      hashedpassword: {
+          type: Sequelize.STRING,
+          allowNull: false
       },
       salt: {
-        type: Sequelize.STRING
+          type: Sequelize.STRING,
+          allowNull: false
       },
-      companyName: {
-        type: Sequelize.STRING
+      companyname: {
+          type: Sequelize.STRING,
+          allowNull: false
       },
-      companyAddress: {
-        type: Sequelize.STRING
+      companyaddress: {
+          type: Sequelize.STRING,
+          allowNull: false
       },
-      companyNumber: {
-        type: Sequelize.STRING
+      companynumber: {
+          type: Sequelize.STRING,
+          allowNull: false
       },
-      phoneNumber: {
-          type: Sequelize.STRING
+      phonenumber: {
+          type: Sequelize.STRING,
+          allowNull: false
       },
-      createdAt: {
+      createdat: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updatedat: {
         allowNull: false,
         type: Sequelize.DATE
       }
