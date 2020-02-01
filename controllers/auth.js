@@ -1,5 +1,7 @@
 'use strict';
 
+const passport = require('passport');
+
 module.exports = {
     // Auth middleware
     authenticate: () => {

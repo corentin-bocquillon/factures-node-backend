@@ -7,7 +7,6 @@ const session = require('express-session');
 const passport = require('passport');
 const bodyParser = require('body-parser')
 
-const LocalStrategy = require('passport-local').Strategy;
 let RedisStore = require('connect-redis')(session)
 let redisClient = redis.createClient(6379, "redis");
 
