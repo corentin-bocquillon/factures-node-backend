@@ -1,7 +1,7 @@
 'use strict';
 
 const Utils = require('../src/utils.js')
-const database = require('./models/index.js');
+const database = require('../models/index.js');
 const LocalStrategy = require('passport-local').Strategy;
 
 module.exports = function(passport) {
