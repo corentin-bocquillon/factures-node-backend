@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             unique: true
         },
-        hashedpassword: {
+        hashedPassword: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -15,19 +15,19 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        companyname: {
+        companyName: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        companyaddress: {
+        companyAddress: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        companynumber: {
+        companyNumber: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        phonenumber: {
+        phoneNumber: {
             type: DataTypes.STRING,
             allowNull: false
         }

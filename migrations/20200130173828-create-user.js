@@ -13,7 +13,7 @@ module.exports = {
           allowNull: false,
           unique: true
       },
-      hashedpassword: {
+      hashedPassword: {
           type: Sequelize.STRING,
           allowNull: false
       },
@@ -21,27 +21,27 @@ module.exports = {
           type: Sequelize.STRING,
           allowNull: false
       },
-      companyname: {
+      companyName: {
           type: Sequelize.STRING,
           allowNull: false
       },
-      companyaddress: {
+      companyAddress: {
           type: Sequelize.STRING,
           allowNull: false
       },
-      companynumber: {
+      companyNumber: {
           type: Sequelize.STRING,
           allowNull: false
       },
-      phonenumber: {
+      phoneNumber: {
           type: Sequelize.STRING,
           allowNull: false
       },
-      createdat: {
+      createdAt: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedat: {
+      updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
       }
