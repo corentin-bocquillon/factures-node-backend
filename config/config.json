@@ -23,5 +23,7 @@
     "dialect": "postgres",
     "operatorsAliases": false
   },
-  "saltSize": 128
+
+  // 64 octets
+  "saltSize": 64
 }
