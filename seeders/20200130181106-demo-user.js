@@ -6,9 +6,7 @@ const config = require('../config/config.json')
 module.exports = {
   up: async (queryInterface, Sequelize) => {
       let salt = await utils.generateSalt(config.saltSize);
-      console.log("Salt : " + salt);
       let hashedPassword = await utils.getPasswordHash('test123', salt);
-      console.log("Hashed password : " + hashedPassword);
 
       return queryInterface.bulkInsert('users', [{
           email: 'root@factures.org',

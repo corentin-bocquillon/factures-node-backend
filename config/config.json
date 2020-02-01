@@ -24,6 +24,5 @@
     "operatorsAliases": false
   },
 
-  // 64 octets
   "saltSize": 64
 }
