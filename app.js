@@ -34,7 +34,7 @@ const auth = () => {
     return (req, res, next) => {
         passport.authenticate('local', (error, user, info) => {
             if(error) {
-                res.status(401).json({"statusCode": 401, "message": error});
+                res.status(401).json({"statusCode": 401, "message": "error : " + error.toString()});
             } else if(!user) {
                 res.status(401).json({"statusCode": 401, "message": "User does not exist"});
             } else {
