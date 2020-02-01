@@ -1,12 +1,12 @@
 'use strict';
 
 const Utils = require('../src/utils.js')
-const User = require('../models/user.js');
+const database = require('./models/index.js');
 const LocalStrategy = require('passport-local').Strategy;
 
 module.exports = function(passport) {
     passport.use(new LocalStrategy((username, password, done) => {
-        User.findOne({where: { email: username }}).then(async (user) => {
+        database.User.findOne({where: { email: username }}).then(async (user) => {
             let hashedPassword = await Utils.getPasswordHash(password, user.salt);
             if (hashedPassword === user.hashedPassword) {
                 return done(null, user);
@@ -25,7 +25,7 @@ module.exports = function(passport) {
     });
 
     passport.deserializeUser((id, done) => {
-        User.findByPk(id).then(user => {
+        database.User.findByPk(id).then(user => {
             if (user) {
                 done(null, user);
             } else {
