@@ -11,8 +11,6 @@ const LocalStrategy = require('passport-local').Strategy;
 let RedisStore = require('connect-redis')(session)
 let redisClient = redis.createClient(6379, "redis");
 
-const User = require('./models/user.js');
-
 const port = 3000;
 
 const utils = require('./src/utils.js')
