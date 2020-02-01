@@ -2,7 +2,9 @@ const User = require('../models/index.js')['users'];
 
 module.exports = {
     get: (req, res) => {
-        res.status(200).json(User.findByPk(req.user.id));
+        User.findByPk(req.user.id).then(user => {
+            res.status(200).json(user.get({ plain: true }));
+        });
     },
 
     post: (req, res) => {
