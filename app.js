@@ -33,11 +33,15 @@ app.use(bodyParser.json())
 const auth = () => {
     return (req, res, next) => {
         passport.authenticate('local', (error, user, info) => {
-            if(error) res.status(400).json({"statusCode" : 200 ,"message" : error});
-            req.login(user, function(error) {
-                if (error) return next(error);
-                next();
-            });
+            if(error) res.status(401).json({"statusCode": 401, "message": error});
+            if(!user) {
+                res.status(401).json({"statusCode": 401, "message": "User does not exist"});
+            } else {
+                req.login(user, function(error) {
+                    if (error) return next(error);
+                    next();
+                });
+            }
         })(req, res, next);
     }
 }
