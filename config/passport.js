@@ -9,7 +9,7 @@ module.exports = function(passport) {
         User.findOne({where: { email: username }}).then(async (user) => {
             let hashedPassword = await Utils.getPasswordHash(password, user.salt);
             if (hashedPassword === user.hashedPassword) {
-                return done(null, err);
+                return done(null, user);
             } else {
                 console.log('Incorrect password.');
                 return done(null, false, { message: 'Incorrect password.' });
