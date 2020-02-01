@@ -13,7 +13,7 @@ let redisClient = redis.createClient(6379, "redis");
 
 const port = 3000;
 
-const auth = require('controllers/auth.js');
+const auth = require('./controllers/auth.js');
 
 // Add passport configuration
 require('./config/passport.js')(passport)
