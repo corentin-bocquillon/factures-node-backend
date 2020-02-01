@@ -13,5 +13,6 @@ module.exports = {
                 "id": req.user.id
             }
         });
+        res.status(200);
     }
 };
