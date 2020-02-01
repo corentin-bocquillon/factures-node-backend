@@ -4,8 +4,8 @@ const crypto = require('crypto');
 const util = require('util');
 
 module.exports = {
-    generateSalt: (size) => {
-        return util.promisify(crypto.randomBytes)(size);
+    generateSalt: async (size) => {
+        return await crypto.randomBytes(size).toString('hex');
     },
 
     getPasswordHash: (password, salt) => {
