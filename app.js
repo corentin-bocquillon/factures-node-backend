@@ -13,7 +13,7 @@ let redisClient = redis.createClient(6379, "redis");
 
 const port = 3000;
 
-const utils = require('./src/utils.js')
+const auth = require('controllers/auth.js');
 
 // Add passport configuration
 require('./config/passport.js')(passport)
@@ -27,52 +27,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json())
 
-// Auth middleware
-const auth = () => {
-    return (req, res, next) => {
-        passport.authenticate('local', (error, user, info) => {
-            if(error) {
-                res.status(401).json({"statusCode": 401, "message": "error : " + error.toString()});
-            } else if(!user) {
-                res.status(401).json({"statusCode": 401, "message": "User does not exist"});
-            } else {
-                req.login(user, function(error) {
-                    if (error) return next(error);
-                    next();
-                });
-            }
-        })(req, res, next);
-    }
-}
-
-// isLoggedIn guard
-const isLoggedIn = (req, res, next) => {
-    if(req.isAuthenticated()){
-        return next()
-    }
-    return res.status(400).json({"statusCode" : 400, "message" : "Not authenticated"})
-}
-
-// Authentication
-app.post('/api/authenticate', auth(), (req, res) => {
-    res.status(200).json({"statusCode": 200 , "message": res.user});
-});
-
-// Logout
-app.get('/api/logout', function(req, res) {
-    req.logout();
-    res.status(200).json({"statusCode": 200, "message": "Logged out."});
-});
-
-// Getting profile
-app.get('/api/get-profile', isLoggedIn, (req, res) => {
-    
-});
-
-// Generate a bill
-// app.post('/api/generate-bill', isLoggedIn, (req, res) => {
-//     res.status(200).json({"statusCode": 200, "message": "Error, facture not generated."});
-// });
+// Add routes
+require('./routes/routes.js')(app)
 
 // Run server
 app.listen(port, () => {
