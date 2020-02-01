@@ -16,8 +16,8 @@ module.exports = {
           companyaddress: 'TestCompany Address',
           companynumber: '123456',
           phonenumber: '+33101010101',
-          createdAt: new Date(),
-          updatedAt: new Date()
+          createdat: new Date(),
+          updatedat: new Date()
       }], {});
   },
 
