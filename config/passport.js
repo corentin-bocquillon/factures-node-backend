@@ -11,9 +11,11 @@ module.exports = function(passport) {
             if (hashedPassword === user.hashedPassword) {
                 return done(null, err);
             } else {
+                console.log('Incorrect password.');
                 return done(null, false, { message: 'Incorrect password.' });
             }
         }).catch(err => {
+            console.log('Incorrect username.');
             return done(null, false, { message: 'Incorrect username.' });
         });
     }));
