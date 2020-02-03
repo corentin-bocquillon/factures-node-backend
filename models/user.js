@@ -35,5 +35,33 @@ module.exports = (sequelize, DataTypes) => {
     User.associate = function(models) {
         // associations can be defined here
     };
+
+    User.getProfile = () {
+        return {
+            companyName: this.companyName,
+            companyAddress: this.companyAddress,
+            companyNumber: this.companyNumber,
+            phoneNumber: this.phoneNumber
+        };
+    };
+
+    User.setProfile = (profile, id) => {
+        if (profile.companyName && profile.companyAddress
+            && profile.companyNumber && profile.phoneNumber) {
+            let fields = {
+                companyName: profile.companyName,
+                companyAddress: profile.companyAddress,
+                companyNumber: profile.companyNumber,
+                phoneNumber: profile.phoneNumber
+            };
+
+            this.update(fields, {
+                where: {
+                    "id": id
+                }
+            });
+        }
+    };
+
     return User;
 };
