@@ -1,7 +1,38 @@
 'use strict';
 
+const { Sequelize, DataTypes, Model } = require('sequelize');
+
+class User extends Model {
+    getProfile() {
+        return {
+            companyName: this.companyName,
+            companyAddress: this.companyAddress,
+            companyNumber: this.companyNumber,
+            phoneNumber: this.phoneNumber
+        };
+    }
+
+    setProfile(profile, id) {
+        if (profile.companyName && profile.companyAddress
+            && profile.companyNumber && profile.phoneNumber) {
+            let fields = {
+                companyName: profile.companyName,
+                companyAddress: profile.companyAddress,
+                companyNumber: profile.companyNumber,
+                phoneNumber: profile.phoneNumber
+            };
+
+            this.update(fields, {
+                where: {
+                    "id": id
+                }
+            });
+        }
+    }
+}
+
 module.exports = (sequelize, DataTypes) => {
-    const User = sequelize.define('users', {
+    User.init({
         email: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -31,36 +62,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         }
-    }, {});
+    }, {sequelize, modelName: 'users'});
+
     User.associate = function(models) {
         // associations can be defined here
-    };
-
-    User.getProfile = () => {
-        return {
-            companyName: this.companyName,
-            companyAddress: this.companyAddress,
-            companyNumber: this.companyNumber,
-            phoneNumber: this.phoneNumber
-        };
-    };
-
-    User.setProfile = (profile, id) => {
-        if (profile.companyName && profile.companyAddress
-            && profile.companyNumber && profile.phoneNumber) {
-            let fields = {
-                companyName: profile.companyName,
-                companyAddress: profile.companyAddress,
-                companyNumber: profile.companyNumber,
-                phoneNumber: profile.phoneNumber
-            };
-
-            this.update(fields, {
-                where: {
-                    "id": id
-                }
-            });
-        }
     };
 
     return User;
