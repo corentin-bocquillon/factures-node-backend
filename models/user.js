@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
         // associations can be defined here
     };
 
-    User.getProfile = () {
+    User.getProfile = () => {
         return {
             companyName: this.companyName,
             companyAddress: this.companyAddress,
