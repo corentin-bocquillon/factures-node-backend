@@ -9,6 +9,6 @@ module.exports = {
 
     post: (req, res) => {
         User.setProfile(req.body, req.user.id);
-        res.status(200);
+        res.status(200).json({ "message": "Profile updated" });
     }
 };
