@@ -3,7 +3,7 @@
 const { Sequelize, DataTypes, Model } = require('sequelize');
 
 class User extends Model {
-    getProfile() {
+    static getProfile() {
         return {
             companyName: this.companyName,
             companyAddress: this.companyAddress,
@@ -12,7 +12,7 @@ class User extends Model {
         };
     }
 
-    setProfile(profile, id) {
+    static setProfile(profile, id) {
         if (profile.companyName && profile.companyAddress
             && profile.companyNumber && profile.phoneNumber) {
             let fields = {
